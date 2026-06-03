@@ -1,0 +1,8 @@
+{
+    "folders": {
+        ".txt": "C:your/route/",
+        ".py": "C:your/route/"
+        ADD MORE IF NEEDED...
+    },
+    "default_folder": "Route/to/guard/"
+}
