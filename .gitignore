@@ -1,8 +1,8 @@
 # Byte-compiled / optimized / DLL files
+# .gitignore
+.env
 __pycache__/
-*.py[codz]
-*$py.class
-
+*.log
 # C extensions
 *.so
 

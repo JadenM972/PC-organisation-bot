@@ -1,26 +1,23 @@
+import os
 import asyncio
-import dotenv
+from dotenv import load_dotenv
 from telegram import Bot
 
+# 1. Carga las variables una sola vez al inicio
+load_dotenv()
+TOKEN = os.getenv('TOKEN_TEL')
+CHAT_ID = os.getenv('CHAT_ID')
 
-dotenv.load_dotenv()
-TOKEN = dotenv.get_key('.env', 'TOKEN_TEL')
-CHAT_ID = dotenv.get_key('.env', 'CHAT_ID')
+# 2. Instancia el bot una sola vez (es un objeto persistente)
+bot = Bot(token=TOKEN)
 
-
-async def enviar_mensaje_async(texto):
-    bot = Bot(token=TOKEN)
-    await bot.send_message(chat_id=CHAT_ID, text=texto)
-
-
-
-
-
-def alert (texto):
+async def send_message_async(texto):
     try:
-        asyncio.run(enviar_mensaje_async(texto))
+        # Reutilizamos el objeto bot ya instanciado
+        await bot.send_message(chat_id=CHAT_ID, text=texto)
     except Exception as e:
-        print(f"Error sending message: {e}")
+        print(f"Error en Telegram: {e}")
 
-
-
+def alert(texto):
+    # Solo disparas el envío
+    asyncio.run(send_message_async(texto))
